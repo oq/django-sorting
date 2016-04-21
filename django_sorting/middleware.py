@@ -1,15 +1,17 @@
 def get_field(self):
     try:
-        field = self.REQUEST['sort']
+        field = self.GET.get('sort', self.POST.get('sort', ''))
     except (KeyError, ValueError, TypeError):
         field = ''
     return (self.direction == 'desc' and '-' or '') + field
 
+
 def get_direction(self):
     try:
-        return self.REQUEST['dir']
+        return self.GET.get('dir', self.POST.get('dir', ''))
     except (KeyError, ValueError, TypeError):
         return 'desc'
+
 
 class SortingMiddleware(object):
     """
