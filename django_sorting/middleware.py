@@ -14,13 +14,13 @@ def get_direction(self):
 
 
 class SortingMiddleware(object):
-    def __init__(self, get_response):
+    def __init__(self, get_response=None):
         if get_response is not None:
             self.get_response = get_response
 
     def __call__(self, request):
         self.process_request(request)
-        return  self.get_response(request)
+        return self.get_response(request)
 
     """
     Inserts a variable representing the field (with direction of sorting)
